@@ -88,24 +88,17 @@ After installing skills, run `/start` in any target repo. It:
 
 ## Slash commands (9 skills)
 
-### Onboarding loop
-
-| Skill | Slash | When to use |
-|-------|-------|-------------|
-| [start-onboarding](skills/start-onboarding/) | `/start` | First time — bootstrap docs + install rule |
-| [audit-project](skills/audit-project/) | `/audit` | Completion % and documentation gaps |
-| [continue-onboarding](skills/continue-onboarding/) | `/continue` | Explore next highest-priority area (one per session) |
-| [learn-module](skills/learn-module/) | `/learn` | Deep-dive one module in mentor mode |
-| [update-docs](skills/update-docs/) | `/update-docs` | Capture new knowledge after work |
-| [quick-reference](skills/quick-reference/) | `/quick-ref` | "Where is X?" from state files — no full scan |
-
-### Development workflow
-
-| Skill | Slash | When to use |
-|-------|-------|-------------|
-| [ticket-analysis](skills/ticket-analysis/) | `/ticket` | Analyze ticket — requirements, impact, plan (no code) |
-| [review-work](skills/review-work/) | `/review` | Pre-merge review — patterns, edge cases, tests |
-| [prepare-commits](skills/prepare-commits/) | `/prepare-commits` | Group git changes into commit-ready batches |
+| Skill | Slash Command | Purpose |
+|-------|---------------|---------|
+| start-onboarding | `/start` | Bootstrap onboarding docs |
+| audit-project | `/audit` | Measure onboarding completeness |
+| continue-onboarding | `/continue` | Explore the next priority area |
+| learn-module | `/learn` | Deep-dive into a specific module |
+| update-docs | `/update-docs` | Capture new discoveries |
+| quick-reference | `/quick-ref` | Find information quickly |
+| ticket-analysis | `/ticket` | Analyze work before implementation |
+| review-work | `/review` | Review changes before merging |
+| prepare-commits | `/prepare-commits` | Organize commits logically |
 
 All slash skills use `disable-model-invocation: true` — invoke them explicitly in chat.
 

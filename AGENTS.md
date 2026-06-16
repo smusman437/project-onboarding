@@ -10,17 +10,17 @@ npx skills add smusman437/project-onboarding --skill '*' -y
 
 ## Slash command map
 
-| User says | Load skill | Action |
-|-----------|------------|--------|
-| `/start` | start-onboarding | Bootstrap `docs/onboarding/` + install rule |
-| `/audit` | audit-project | Gap report + completion % |
-| `/continue` | continue-onboarding | Explore one next-priority area |
-| `/learn [module]` | learn-module | Mentor deep-dive on one module |
-| `/update-docs` | update-docs | Capture new knowledge to state files |
-| `/quick-ref [query]` | quick-reference | Lookup from state files |
-| `/ticket` | ticket-analysis | Analyze ticket — plan only, no code |
-| `/review` | review-work | Pre-merge diff review |
-| `/prepare-commits` | prepare-commits | Propose commit groups and messages |
+| Slash Command | Skill | Purpose |
+|---------------|-------|---------|
+| `/start` | start-onboarding | Bootstrap onboarding docs |
+| `/audit` | audit-project | Measure onboarding completeness |
+| `/continue` | continue-onboarding | Explore the next priority area |
+| `/learn` | learn-module | Deep-dive into a specific module |
+| `/update-docs` | update-docs | Capture new discoveries |
+| `/quick-ref` | quick-reference | Find information quickly |
+| `/ticket` | ticket-analysis | Analyze work before implementation |
+| `/review` | review-work | Review changes before merging |
+| `/prepare-commits` | prepare-commits | Organize commits logically |
 
 ## Workflow order
 
