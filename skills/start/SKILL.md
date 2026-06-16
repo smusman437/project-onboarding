@@ -1,5 +1,5 @@
 ---
-name: start-onboarding
+name: start
 description: Bootstrap docs/onboarding/ state files on any codebase for zero-knowledge onboarding. Use when starting onboarding, setting up a new project, bootstrapping documentation, or when the user runs /start on an unknown repo.
 disable-model-invocation: true
 ---
@@ -30,8 +30,8 @@ Templates and rules ship inside this skill folder. Resolve paths relative to thi
 | `rules/project-knowledge-first.mdc` | Always-on Cursor rule for doc-first workflow |
 
 Typical install locations:
-- Cursor: `.cursor/skills/start-onboarding/` or `.agents/skills/start-onboarding/`
-- Other agents: `.agents/skills/start-onboarding/`
+- Cursor: `.cursor/skills/start/` or `.agents/skills/start/`
+- Other agents: `.agents/skills/start/`
 
 If bundled templates are not found, use the inline scaffolds in the "Fallback scaffolds" section below.
 

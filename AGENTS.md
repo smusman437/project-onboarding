@@ -10,16 +10,18 @@ npx skills add smusman437/project-onboarding --skill '*' -y
 
 ## Slash command map
 
-| Slash Command | Skill | Purpose |
-|---------------|-------|---------|
-| `/start` | start-onboarding | Bootstrap onboarding docs |
-| `/audit` | audit-project | Measure onboarding completeness |
-| `/continue` | continue-onboarding | Explore the next priority area |
-| `/learn` | learn-module | Deep-dive into a specific module |
+Skill folder names match slash commands — type `/start` to invoke the `start` skill.
+
+| Slash Command | Skill folder | Purpose |
+|---------------|--------------|---------|
+| `/start` | start | Bootstrap onboarding docs |
+| `/audit` | audit | Measure onboarding completeness |
+| `/continue` | continue | Explore the next priority area |
+| `/learn` | learn | Deep-dive into a specific module |
 | `/update-docs` | update-docs | Capture new discoveries |
-| `/quick-ref` | quick-reference | Find information quickly |
-| `/ticket` | ticket-analysis | Analyze work before implementation |
-| `/review` | review-work | Review changes before merging |
+| `/quick-ref` | quick-ref | Find information quickly |
+| `/ticket` | ticket | Analyze work before implementation |
+| `/review` | review | Review changes before merging |
 | `/prepare-commits` | prepare-commits | Organize commits logically |
 
 ## Workflow order
@@ -58,4 +60,4 @@ If `docs/onboarding/` does not exist, redirect user to `/start` before onboardin
 
 - Skills use standard `SKILL.md` YAML frontmatter (`name`, `description`)
 - Slash-triggered skills set `disable-model-invocation: true`
-- Templates and rules bundled in `start-onboarding` skill directory
+- Templates and rules bundled in `start` skill directory

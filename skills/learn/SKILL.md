@@ -1,5 +1,5 @@
 ---
-name: learn-module
+name: learn
 description: Deep-dive one module or domain in mentor mode with file pointers and teaching summary. Use when learning architecture, understanding a codebase area, mentor-style onboarding, or when the user runs /learn.
 disable-model-invocation: true
 ---

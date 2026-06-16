@@ -1,5 +1,5 @@
 ---
-name: continue-onboarding
+name: continue
 description: Pick the next highest-priority unexplored area from onboarding audit tiers and explore one bounded domain. Use for codebase exploration loops, continuing onboarding, next steps on a new project, or when the user runs /continue.
 disable-model-invocation: true
 ---

@@ -1,5 +1,5 @@
 ---
-name: quick-reference
+name: quick-ref
 description: Answer "where is X?" questions using onboarding state files without a full codebase scan. Use for quick lookups, finding files, onboarding cheat sheet, or when the user runs /quick-ref.
 disable-model-invocation: true
 ---

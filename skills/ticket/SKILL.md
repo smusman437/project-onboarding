@@ -1,5 +1,5 @@
 ---
-name: ticket-analysis
+name: ticket
 description: Analyzes tickets for business requirements, affected repos/modules, root cause, and implementation planning without writing code. Use when the user invokes /ticket, pastes a Jira or Linear ticket, or asks for ticket analysis on an onboarded codebase.
 disable-model-invocation: true
 ---

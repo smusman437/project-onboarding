@@ -45,6 +45,20 @@ Confirm after install:
 npx skills list
 ```
 
+You should see short names: `start`, `audit`, `continue`, `learn`, `update-docs`, `quick-ref`, `ticket`, `review`, `prepare-commits`. Type `/start` in Cursor — not `/start-onboarding`.
+
+### Updating from an older install (renamed skills)
+
+If you previously installed skills with long names (`start-onboarding`, `audit-project`, etc.), remove them and reinstall:
+
+```bash
+npx skills remove start-onboarding audit-project continue-onboarding learn-module quick-reference ticket-analysis review-work update-docs prepare-commits -y
+npx skills add smusman437/project-onboarding --skill '*' -y
+npx skills update -y
+```
+
+Then reload Cursor: **Cmd+Shift+P → Developer: Reload Window**.
+
 Then bootstrap your target repo in Cursor Agent:
 
 ```
@@ -65,7 +79,7 @@ Scaffold a new skill when extending this repo:
 npx skills init my-new-skill --path skills/my-new-skill
 ```
 
-If you edit repo-root `templates/` or `rules/`, sync copies into `skills/start-onboarding/templates/` and `skills/start-onboarding/rules/` before pushing.
+If you edit repo-root `templates/` or `rules/`, sync copies into `skills/start/templates/` and `skills/start/rules/` before pushing.
 
 ### 2. Project init (users)
 
@@ -90,15 +104,17 @@ After installing skills, run `/start` in any target repo. It:
 
 | Skill | Slash Command | Purpose |
 |-------|---------------|---------|
-| start-onboarding | `/start` | Bootstrap onboarding docs |
-| audit-project | `/audit` | Measure onboarding completeness |
-| continue-onboarding | `/continue` | Explore the next priority area |
-| learn-module | `/learn` | Deep-dive into a specific module |
+| start | `/start` | Bootstrap onboarding docs |
+| audit | `/audit` | Measure onboarding completeness |
+| continue | `/continue` | Explore the next priority area |
+| learn | `/learn` | Deep-dive into a specific module |
 | update-docs | `/update-docs` | Capture new discoveries |
-| quick-reference | `/quick-ref` | Find information quickly |
-| ticket-analysis | `/ticket` | Analyze work before implementation |
-| review-work | `/review` | Review changes before merging |
+| quick-ref | `/quick-ref` | Find information quickly |
+| ticket | `/ticket` | Analyze work before implementation |
+| review | `/review` | Review changes before merging |
 | prepare-commits | `/prepare-commits` | Organize commits logically |
+
+> **Note:** The skill folder name matches the slash command — e.g. type `/start` to invoke the `start` skill.
 
 All slash skills use `disable-model-invocation: true` — invoke them explicitly in chat.
 
@@ -209,20 +225,20 @@ project-onboarding/
 ├── LICENSE
 ├── rules/
 │   └── project-knowledge-first.mdc
-├── skills/                   # 9 installable skills (skills.sh entry point)
-│   ├── start-onboarding/
+├── skills/                   # 9 installable skills (folder name = slash command)
+│   ├── start/
 │   │   ├── SKILL.md
 │   │   ├── templates/        # Bundled — copied to target repo on /start
 │   │   └── rules/            # Bundled — installed on /start
-│   ├── continue-onboarding/
-│   ├── audit-project/
-│   ├── learn-module/
+│   ├── continue/
+│   ├── audit/
+│   ├── learn/
 │   ├── update-docs/
-│   ├── quick-reference/
-│   ├── ticket-analysis/
-│   ├── review-work/
+│   ├── quick-ref/
+│   ├── ticket/
+│   ├── review/
 │   └── prepare-commits/
-└── templates/                # Contributor source (sync to start-onboarding/)
+└── templates/                # Contributor source (sync to skills/start/)
     └── per-repo/
 ```
 
@@ -261,7 +277,7 @@ Also see [smusman437/prompt-master](https://www.skills.sh/smusman437/prompt-mast
 ## Contributing
 
 1. Edit skill in `skills/<name>/SKILL.md`
-2. If changing templates/rules, sync to `skills/start-onboarding/`
+2. If changing templates/rules, sync to `skills/start/`
 3. Test locally:
    ```bash
    npx skills add /path/to/project-onboarding --list

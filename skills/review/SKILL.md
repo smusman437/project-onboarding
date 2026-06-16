@@ -1,5 +1,5 @@
 ---
-name: review-work
+name: review
 description: Reviews code changes for patterns, architecture, error handling, edge cases, backward compatibility, and test impact. Use when the user invokes /review or asks to review changes, diffs, or work in progress before merge.
 disable-model-invocation: true
 ---

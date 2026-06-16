@@ -1,5 +1,5 @@
 ---
-name: audit-project
+name: audit
 description: Produce onboarding gap analysis with completion percentage and prioritized tiers. Use when auditing documentation coverage, measuring onboarding progress, finding codebase exploration gaps, or when the user runs /audit.
 disable-model-invocation: true
 ---
