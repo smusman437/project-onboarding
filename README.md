@@ -1,166 +1,280 @@
 # Project Onboarding Skills
 
-**Go from zero knowledge to advanced project understanding with minimal tokens per session** — persistent state files + bounded slash commands replace full-repo re-scans every chat.
+**Go from zero knowledge to advanced project understanding with minimal tokens per session** — persistent state files, bounded slash commands, and an always-on doc-first rule replace full-repo re-scans every chat.
 
-Installable via [skills.sh](https://skills.sh) for Cursor, Codex, GitHub Copilot, Windsurf, and other Agent Skills-compatible tools.
+| | |
+|---|---|
+| **GitHub** | [github.com/smusman437/project-onboarding](https://github.com/smusman437/project-onboarding) |
+| **skills.sh** | [skills.sh/smusman437/project-onboarding](https://www.skills.sh/smusman437/project-onboarding) |
+| **Skills** | 9 installable slash commands |
+| **Agents** | Cursor, Codex, GitHub Copilot, Windsurf, Claude Code, and more |
 
-**Repository:** [github.com/smusman437/project-onboarding](https://github.com/smusman437/project-onboarding)
+Works on any codebase — monorepo, multi-repo, or single-repo — with no prior project knowledge required.
 
 ---
 
-## Install (all skills at once)
+## Install all skills (recommended)
+
+Use `--skill '*'` to install every skill in one command (no picker prompt):
 
 ```bash
 npx skills add smusman437/project-onboarding --skill '*' -y
 ```
 
-Install for Cursor only:
+Cursor only:
 
 ```bash
 npx skills add smusman437/project-onboarding --skill '*' -y -a cursor
 ```
 
-Install globally (all your projects):
+Global (available in all projects):
 
 ```bash
 npx skills add smusman437/project-onboarding --skill '*' -y -g
 ```
 
-Verify discovery:
+Verify the package before installing:
 
 ```bash
 npx skills add smusman437/project-onboarding --list
 ```
 
-Confirm local install:
+Confirm after install:
 
 ```bash
 npx skills list
+```
+
+Then bootstrap your target repo in Cursor Agent:
+
+```
+/start
 ```
 
 ---
 
 ## What is init?
 
-This repo uses **init** in three related ways. They apply at different stages.
+This package uses **init** in three ways:
 
-### 1. Package init (for contributors)
+### 1. Package init (contributors)
 
-When **adding a new skill to this package**, scaffold a `SKILL.md` with the skills CLI:
+Scaffold a new skill when extending this repo:
 
 ```bash
 npx skills init my-new-skill --path skills/my-new-skill
 ```
 
-If you change repo-root `templates/`, sync copies into `skills/start-onboarding/templates/` before publishing.
+If you edit repo-root `templates/` or `rules/`, sync copies into `skills/start-onboarding/templates/` and `skills/start-onboarding/rules/` before pushing.
 
-### 2. Project init (for users)
+### 2. Project init (users)
 
-Install all skills, then bootstrap local state in your target repo:
+After installing skills, run `/start` in any target repo. It:
 
-```bash
-npx skills add smusman437/project-onboarding --skill '*' -y
-```
-
-Then in Cursor Agent:
-
-```
-/start
-```
-
-The `/start` skill:
 - Creates `docs/onboarding/` with state files and per-repo doc stubs
-- Installs `.cursor/rules/project-knowledge-first.mdc` so every agent session reads onboarding docs before analyzing code
+- Detects stack and layout (monorepo / multi-repo / single-repo)
+- Installs `.cursor/rules/project-knowledge-first.mdc`
 
 ### 3. Project-Knowledge-First rule (auto-installed)
 
-`/start` copies the bundled Cursor rule to `.cursor/rules/project-knowledge-first.mdc`. It sets `alwaysApply: true` and enforces doc-first, bounded exploration, plan-before-edit, and `/update-docs` after new discoveries.
+`/start` copies an always-on Cursor rule that enforces:
+
+- Read `docs/onboarding/` before analyzing code
+- Explore only repos/modules relevant to the task
+- Plan before implementation; prefer minimal diffs
+- Run `/update-docs` after discovering new knowledge
 
 ---
 
-## Slash commands
+## Slash commands (9 skills)
 
 ### Onboarding loop
 
 | Skill | Slash | When to use |
 |-------|-------|-------------|
-| start-onboarding | `/start` | First time on a repo — bootstrap `docs/onboarding/` + install rule |
-| audit-project | `/audit` | Measure completion % and find documentation gaps |
-| continue-onboarding | `/continue` | Explore the next highest-priority area (one per session) |
-| learn-module | `/learn` | Deep-dive one module in mentor mode |
-| update-docs | `/update-docs` | Capture new knowledge after completing work |
-| quick-reference | `/quick-ref` | Answer "where is X?" from state files, no full scan |
+| [start-onboarding](skills/start-onboarding/) | `/start` | First time — bootstrap docs + install rule |
+| [audit-project](skills/audit-project/) | `/audit` | Completion % and documentation gaps |
+| [continue-onboarding](skills/continue-onboarding/) | `/continue` | Explore next highest-priority area (one per session) |
+| [learn-module](skills/learn-module/) | `/learn` | Deep-dive one module in mentor mode |
+| [update-docs](skills/update-docs/) | `/update-docs` | Capture new knowledge after work |
+| [quick-reference](skills/quick-reference/) | `/quick-ref` | "Where is X?" from state files — no full scan |
 
 ### Development workflow
 
 | Skill | Slash | When to use |
 |-------|-------|-------------|
-| ticket-analysis | `/ticket` | Analyze a ticket — requirements, impact, plan (no code) |
-| review-work | `/review` | Review diffs before merge — patterns, edge cases, tests |
-| prepare-commits | `/prepare-commits` | Group changes into commit-ready batches with messages |
+| [ticket-analysis](skills/ticket-analysis/) | `/ticket` | Analyze ticket — requirements, impact, plan (no code) |
+| [review-work](skills/review-work/) | `/review` | Pre-merge review — patterns, edge cases, tests |
+| [prepare-commits](skills/prepare-commits/) | `/prepare-commits` | Group git changes into commit-ready batches |
 
-All slash-triggered skills use `disable-model-invocation: true` — invoke them explicitly.
+All slash skills use `disable-model-invocation: true` — invoke them explicitly in chat.
 
 ---
 
 ## 5-minute quickstart
 
-1. **Install all skills** — `npx skills add smusman437/project-onboarding --skill '*' -y`
-2. **Init project** — `/start`
-3. **Measure gaps** — `/audit`
-4. **Explore one area** — `/continue`
-5. **Go deep** — `/learn auth` (or any module name)
+```
+1. npx skills add smusman437/project-onboarding --skill '*' -y
+2. /start          → bootstrap docs/onboarding/ + rule
+3. /audit          → see completion % and gaps
+4. /continue       → explore one area, update progress.md
+5. /learn auth     → deep-dive a module (optional)
+```
 
-Daily workflow:
+**Daily workflow:**
 
 ```
-/ticket <paste issue>  → plan work
+/ticket            → plan from issue (paste Jira/Linear/GitHub ticket)
 ... implement ...
-/review                → pre-merge check
-/prepare-commits       → commit groups
-/update-docs           → capture new knowledge
-/continue              → next onboarding area
+/review            → pre-merge check
+/prepare-commits   → commit groups with messages
+/update-docs       → capture new knowledge
+/continue          → next onboarding area
+/quick-ref         → quick lookup anytime
+```
+
+Come back tomorrow — `/continue` reads `progress.md` and picks up where you left off.
+
+---
+
+## Example session
+
+```
+You: /start
+
+Agent: Detected single-repo Node/Express app.
+       Created docs/onboarding/ with state files + repos/api/ stubs.
+       Installed .cursor/rules/project-knowledge-first.mdc
+       Next: /audit
+
+You: /audit
+
+Agent: Overall completion: 12%. Top gap: no request flow documented.
+       Next: /continue
+
+You: /continue
+
+Agent: Explored src/routes/ (11 files). Updated progress.md.
+       Next target: database layer.
+
+You: /ticket PROJ-123 [paste ticket]
+
+Agent: [Requirements, affected modules, implementation plan — no code]
+
+You: /review
+
+Agent: [Pre-merge findings: patterns, edge cases, test gaps]
+
+You: /prepare-commits
+
+Agent: [2 proposed commit groups with messages and git commands]
 ```
 
 ---
 
-## Repo section guide
+## State files (created in your target repo)
 
-| Path | Purpose |
-|------|---------|
-| `skills/` | Installable slash-command workflows (9 skills). skills.sh discovers skills here. |
-| `skills/start-onboarding/templates/` | Bundled scaffolds for `/start` (sync from repo-root `templates/`). |
-| `skills/start-onboarding/rules/` | Bundled Cursor rule for `/start`. |
-| `rules/` | Source of truth for `project-knowledge-first.mdc`. |
-| `templates/` | Contributor source for state file scaffolds. |
-| `AGENTS.md` | Cross-agent routing — slash map, state files, token budget. |
-
----
-
-## State file roles
-
-Created in **your target repo** at `docs/onboarding/`:
+Default path: `docs/onboarding/` (overridable in `project-memory.md`).
 
 | File | Role |
 |------|------|
 | `project-memory.md` | Source of truth — config, stack, conventions |
-| `progress.md` | Session log and resume pointer for `/continue` |
-| `onboarding-audit.md` | Gap analysis and completion % |
-| `open-questions.md` | Blocked items only |
+| `progress.md` | Session log; resume pointer for `/continue` |
+| `onboarding-audit.md` | Gap analysis, tier scores, completion % |
+| `open-questions.md` | Blocked items and unanswered questions |
 | `repositories-overview.md` | Index of discovered repos/modules |
-| `repos/<slug>/*.md` | Per-repo domain docs |
+| `repos/<slug>/overview.md` | High-level purpose of one repo/module |
+| `repos/<slug>/architecture.md` | Layers, components, dependencies |
+| `repos/<slug>/request-flow.md` | End-to-end flow trace |
+| `repos/<slug>/common-patterns.md` | Conventions and patterns |
+| `repos/<slug>/integrations.md` | External systems and APIs |
+| `repos/<slug>/important-files.md` | "Start here" file index |
+
+Each file has one role — do not duplicate facts across files.
 
 ---
 
-## Verify live on skills.sh
+## Token efficiency
 
-1. **GitHub public:** [github.com/smusman437/project-onboarding](https://github.com/smusman437/project-onboarding)
-2. **CLI lists 9 skills:**
+| Without these skills | With these skills |
+|----------------------|-------------------|
+| Re-explain the repo every chat | Read 2–4 state files (~few KB) |
+| Full-tree scan per question | One bounded area per `/continue` |
+| Context lost between sessions | `progress.md` compounds over days/weeks |
+| No doc-first discipline | Always-on Project-Knowledge-First rule |
+
+Each onboarding skill enforces: read state first → explore one area → write back → teach summary.
+
+---
+
+## Repo structure
+
+```
+project-onboarding/
+├── README.md
+├── AGENTS.md                 # Cross-agent routing
+├── LICENSE
+├── rules/
+│   └── project-knowledge-first.mdc
+├── skills/                   # 9 installable skills (skills.sh entry point)
+│   ├── start-onboarding/
+│   │   ├── SKILL.md
+│   │   ├── templates/        # Bundled — copied to target repo on /start
+│   │   └── rules/            # Bundled — installed on /start
+│   ├── continue-onboarding/
+│   ├── audit-project/
+│   ├── learn-module/
+│   ├── update-docs/
+│   ├── quick-reference/
+│   ├── ticket-analysis/
+│   ├── review-work/
+│   └── prepare-commits/
+└── templates/                # Contributor source (sync to start-onboarding/)
+    └── per-repo/
+```
+
+---
+
+## skills.sh listing
+
+Your package is **installable immediately** via the CLI. The [skills.sh](https://skills.sh) page is created after the first install telemetry event.
+
+### Confirm package works (always reliable)
+
+```bash
+npx skills add smusman437/project-onboarding --list
+```
+
+Expected: `Found 9 skills`
+
+### Get listed on skills.sh
+
+1. Run an install (triggers anonymous telemetry):
    ```bash
-   npx skills add smusman437/project-onboarding --list
+   npx skills add smusman437/project-onboarding --skill '*' -y
    ```
-3. **Search:** `npx skills find onboarding` or browse [skills.sh](https://skills.sh)
-4. **Local install check:** `npx skills list` shows all 9 skills after install
+2. Wait 15–30 minutes, then open:
+   [skills.sh/smusman437/project-onboarding](https://www.skills.sh/smusman437/project-onboarding)
+3. Install count increases with each user who runs `npx skills add`
+
+> **Note:** Homepage search on [skills.sh](https://skills.sh) ranks by total installs. New skills with few installs may not appear in top search results even when indexed — use the direct URL or `--list` to verify.
+
+### Related package
+
+Also see [smusman437/prompt-master](https://www.skills.sh/smusman437/prompt-master) for tool-specific prompt building and repair.
+
+---
+
+## Contributing
+
+1. Edit skill in `skills/<name>/SKILL.md`
+2. If changing templates/rules, sync to `skills/start-onboarding/`
+3. Test locally:
+   ```bash
+   npx skills add /path/to/project-onboarding --list
+   npx skills add /path/to/project-onboarding --skill '*' -y
+   ```
+4. Push to GitHub; run install once to refresh skills.sh index
 
 ---
 
