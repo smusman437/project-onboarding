@@ -21,14 +21,15 @@ Skill folder names match slash commands — type `/start` to invoke the `start` 
 | `/update-docs` | update-docs | Capture new discoveries |
 | `/quick-ref` | quick-ref | Find information quickly |
 | `/ticket` | ticket | Analyze work before implementation |
-| `/review` | review | Review changes before merging |
+| `/qa-review` | qa-review | Validate implementation vs ticket requirements |
+| `/review` | review | Review changes before merging (code quality) |
 | `/prepare-commits` | prepare-commits | Organize commits logically |
 
 ## Workflow order
 
 ```
 /start → /audit → /continue (repeat) → /learn (as needed)
-/ticket → implement → /review → /prepare-commits → /update-docs
+/ticket → implement → /qa-review → /review → /prepare-commits → /update-docs
 /quick-ref anytime for lookups
 ```
 
@@ -40,7 +41,7 @@ Default: `docs/onboarding/` (override via `project-memory.md` → `docs_path`).
 |------|---------|------------|
 | project-memory.md | most skills | start, update-docs |
 | progress.md | continue, audit, learn | continue, learn, update-docs |
-| onboarding-audit.md | continue, audit, learn, ticket | audit, continue, update-docs |
+| onboarding-audit.md | continue, audit, learn, ticket, qa-review | audit, continue, update-docs |
 | open-questions.md | continue, update-docs, ticket | continue, update-docs |
 | repositories-overview.md | audit, quick-ref, ticket | start, update-docs |
 | repos/<slug>/*.md | continue, learn, quick-ref, ticket | continue, learn, update-docs |

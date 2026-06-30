@@ -6,7 +6,7 @@
 |---|---|
 | **GitHub** | [github.com/smusman437/project-onboarding](https://github.com/smusman437/project-onboarding) |
 | **skills.sh** | [skills.sh/smusman437/project-onboarding](https://www.skills.sh/smusman437/project-onboarding) |
-| **Skills** | 9 installable slash commands |
+| **Skills** | 10 installable slash commands |
 | **Agents** | Cursor, Codex, GitHub Copilot, Windsurf, Claude Code, and more |
 
 Works on any codebase — monorepo, multi-repo, or single-repo — with no prior project knowledge required.
@@ -45,7 +45,7 @@ Confirm after install:
 npx skills list
 ```
 
-You should see short names: `start`, `audit`, `continue`, `learn`, `update-docs`, `quick-ref`, `ticket`, `review`, `prepare-commits`. Type `/start` in Cursor — not `/start-onboarding`.
+You should see: `start`, `audit`, `continue`, `learn`, `update-docs`, `quick-ref`, `ticket`, `review`, `qa-review`, `prepare-commits`.
 
 ### Updating from an older install (renamed skills)
 
@@ -100,7 +100,7 @@ After installing skills, run `/start` in any target repo. It:
 
 ---
 
-## Slash commands (9 skills)
+## Slash commands (10 skills)
 
 | Skill | Slash Command | Purpose |
 |-------|---------------|---------|
@@ -111,10 +111,11 @@ After installing skills, run `/start` in any target repo. It:
 | update-docs | `/update-docs` | Capture new discoveries |
 | quick-ref | `/quick-ref` | Find information quickly |
 | ticket | `/ticket` | Analyze work before implementation |
-| review | `/review` | Review changes before merging |
+| qa-review | `/qa-review` | Validate implementation vs ticket requirements |
+| review | `/review` | Review changes before merging (code quality) |
 | prepare-commits | `/prepare-commits` | Organize commits logically |
 
-> **Note:** The skill folder name matches the slash command — e.g. type `/start` to invoke the `start` skill.
+> **Note:** Skill folder name = slash command (e.g. `/qa-review` invokes the `qa-review` skill). `/review` is code quality; `/qa-review` is requirement coverage.
 
 All slash skills use `disable-model-invocation: true` — invoke them explicitly in chat.
 
@@ -135,7 +136,8 @@ All slash skills use `disable-model-invocation: true` — invoke them explicitly
 ```
 /ticket            → plan from issue (paste Jira/Linear/GitHub ticket)
 ... implement ...
-/review            → pre-merge check
+/qa-review         → requirement coverage vs ticket (not code quality)
+/review            → pre-merge code quality check
 /prepare-commits   → commit groups with messages
 /update-docs       → capture new knowledge
 /continue          → next onboarding area
@@ -169,6 +171,10 @@ Agent: Explored src/routes/ (11 files). Updated progress.md.
 You: /ticket PROJ-123 [paste ticket]
 
 Agent: [Requirements, affected modules, implementation plan — no code]
+
+You: /qa-review
+
+Agent: [Requirement coverage %, checklist, gaps vs acceptance criteria]
 
 You: /review
 
